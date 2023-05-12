@@ -5,6 +5,7 @@
 /**/build/
 
 /**/logs/
+/app/config/
 
 *.class
 *.jar
