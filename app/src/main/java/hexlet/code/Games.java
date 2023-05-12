@@ -4,53 +4,67 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Games {
-    public static void greeting(StringBuilder userName) {
-        Scanner inputScan = new Scanner(System.in);
+    private static String userName = "";
+    private static final Scanner inputScanner = new Scanner(System.in);
+    private static int winCounter = 0;
+    private static final Random randSequence = new Random(System.currentTimeMillis());
+    public static String getUserName() {
+        return userName;
+    }
+    public static void greeting() {
         System.out.print(
                 """
+                    
                     Welcome to the Brain Games
                     May I have your name?\s"""
         );
-        userName.append(inputScan.nextLine());
+        userName = inputScanner.nextLine();
         System.out.println("Hello, " + userName + "!");
     }
-    public  static void greeting() {
-        greeting(new StringBuilder());
-    }
-    public  static void evenGuessing() {
-        StringBuilder userName = new StringBuilder();
-        greeting(userName);
-        Scanner inputScan = new Scanner(System.in);
-        int winCounter = 0;
-        Random randSequence = new Random(System.currentTimeMillis());
-        System.out.println("Answer 'yes' if the number is even, otherwise answer 'no'.");
-        do {
-            int randNumber = randSequence.nextInt(1, 100);
-            System.out.format(
-                    """
+    public  static String[] evenGuessing() {
+        String[] gameData = new String[4];
+        gameData[0] = "Answer 'yes' if the number is even, otherwise answer 'no'.";
+        int randNumber = randSequence.nextInt(1, 100);
+        gameData[1] = String.format(
+                """
                         Question: %d
                         Your answer:\s""",
-                    randNumber
-            );
-            String userAnswer = inputScan.nextLine();
-            String correctAnswer = randNumber % 2 == 0 ? "yes" : "no";
-            if (userAnswer.equalsIgnoreCase(correctAnswer)) {
-                winCounter++;
-                System.out.println("Correct!");
-            } else {
-                System.out.format(
-                        """
-                            '%s' is wrong answer ;(. Correct answer was '%s'
-                            Let's try again, %s!
-                            """,
-                        userAnswer,
-                        correctAnswer,
-                        userName
-                );
+                randNumber
+        );
+        gameData[2] = randNumber % 2 == 0 ? "yes" : "no";
+        gameData[3] = "";
+        return gameData;
+    }
+    public static String[] calcGame() {
+        String[] gameData = new String[4];
+        gameData[0] = "What is the result of the expression?";
+        int randOperation = randSequence.nextInt(0, 3);
+        int randNumber1 = randSequence.nextInt(1, 50);
+        int randNumber2 = randSequence.nextInt(1, 50);
+        String question;
+        int correctAnswer;
+        switch (randOperation) {
+            case 0:
+                question = randNumber1 + " + " + randNumber2;
+                correctAnswer = randNumber1 + randNumber2;
                 break;
-            }
-
-        } while (winCounter < 3);
-        System.out.format("Congratulations, %s!\n", userName);
+            case 1:
+                question = randNumber1 + " - " + randNumber2;
+                correctAnswer = randNumber1 - randNumber2;
+                break;
+            default:
+                question = randNumber1 + " * " + randNumber2;
+                correctAnswer = randNumber1 * randNumber2;
+                break;
+        }
+        gameData[1] = String.format(
+                """
+                        Question: %s
+                        Your answer:\s""",
+                question
+        );
+        gameData[2] = "" + correctAnswer;
+        gameData[3] = "";
+        return gameData;
     }
 }
