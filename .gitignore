@@ -1,6 +1,10 @@
-/**/.idea
-/**/.gradle
-/**/build
+/**/.idea/
+
+/**/.gradle/
+
+/**/build/
+
+/**/logs/
 
 *.class
 *.jar
