@@ -1,9 +1,6 @@
 package hexlet.code;
 
-import hexlet.code.games.CalcGame;
-import hexlet.code.games.EvenGuessing;
-import hexlet.code.games.Game;
-import hexlet.code.games.GcdGame;
+import hexlet.code.games.*;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -34,6 +31,9 @@ public class Engine {
                     break;
                 case 4:
                     currentGame = new GcdGame();
+                    break;
+                case 5:
+                    currentGame = new ProgressionGame();
                     break;
                 default:
                     return;
