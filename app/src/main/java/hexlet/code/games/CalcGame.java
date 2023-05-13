@@ -36,7 +36,6 @@ public class CalcGame implements Game {
                         Your answer:\s""",
                 question
         );
-        this.correctAnswer = "" + correctAnswer;
     }
     public String getQuestion() {
         return this.question;

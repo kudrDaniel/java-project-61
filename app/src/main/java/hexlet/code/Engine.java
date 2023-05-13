@@ -3,6 +3,7 @@ package hexlet.code;
 import hexlet.code.games.CalcGame;
 import hexlet.code.games.EvenGuessing;
 import hexlet.code.games.Game;
+import hexlet.code.games.GcdGame;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -30,6 +31,9 @@ public class Engine {
                     break;
                 case 3:
                     currentGame = new CalcGame();
+                    break;
+                case 4:
+                    currentGame = new GcdGame();
                     break;
                 default:
                     return;
