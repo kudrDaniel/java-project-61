@@ -2,7 +2,7 @@ package hexlet.code.games;
 
 import hexlet.code.Engine;
 
-public class CalcGame{
+public class CalcGame {
     private static String question;
     private static String correctAnswer;
     public static String getRules() {

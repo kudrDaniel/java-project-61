@@ -13,7 +13,7 @@ public class ProgressionGame {
     public static void newQuestion() {
         int randOrigin = Engine.getRandomInt(11, 35);
         int randDifference = Engine.getRandomInt(2, 6);
-        int randHiddenIndex = Engine.getRandomInt(0,10);
+        int randHiddenIndex = Engine.getRandomInt(0, 10);
         int progressionLength = 10;
         question = generateProgression(randOrigin, randDifference, randHiddenIndex, progressionLength);
         question = String.format(
@@ -33,7 +33,7 @@ public class ProgressionGame {
 
     private static String generateProgression(int origin, int difference, int hiddenIndex, int length) {
         StringJoiner output = new StringJoiner(" ");
-        for(int i = 0; i < length; i++) {
+        for (int i = 0; i < length; i++) {
             if (i == hiddenIndex) {
                 output.add("..");
             } else {
