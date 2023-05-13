@@ -35,6 +35,9 @@ public class Engine {
                 case 5:
                     currentGame = new ProgressionGame();
                     break;
+                case 6:
+                    currentGame = new PrimeNumberGuessing();
+                    break;
                 default:
                     return;
             }
@@ -49,9 +52,9 @@ public class Engine {
             currentGame.setUserAnswer();
             //Check answer
             if (currentGame.getUserAnswer().equalsIgnoreCase(currentGame.getCorrectAnswer())) {
+                System.out.println("Correct!");
                 winCounter++;
                 currentGame.newQuestion();
-                System.out.println("Correct!");
             } else {
                 System.out.format(
                         """
