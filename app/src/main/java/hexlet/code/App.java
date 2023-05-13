@@ -15,6 +15,10 @@ public class App {
                         Your choice:\s"""
         );
         int choice = scanner.nextInt();
+        if(choice == 0) {
+            return;
+        }
+        System.out.println();
         Engine.startGame(choice);
     }
 }
