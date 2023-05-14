@@ -29,7 +29,8 @@ public class PrimeNumberGuessing {
 
     private static boolean isPrimeNumber(int number) {
         int dividerOrigin = 2;
-        int root = (int) Math.ceil(Math.sqrt(number));
+        int rootOffset = 1;
+        int root = (int) Math.floor(Math.sqrt(number)) + rootOffset;
         for (int i = dividerOrigin; i < root; i++) {
             if (number % i == 0) {
                 return false;
