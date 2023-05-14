@@ -31,7 +31,7 @@ public class Engine {
         //Start by greeting
         System.out.print(
                 """
-                        Welcome to the Brain Games
+                        Welcome to the Brain Games!
                         May I have your name?\s"""
         );
         gameData[INDEX_USER_NAME] = INPUT_SCANNER.nextLine();

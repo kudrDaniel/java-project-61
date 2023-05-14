@@ -8,7 +8,6 @@ public class App {
         Scanner scanner = new Scanner(System.in);
         System.out.print(
                 """
-                        Welcome to the Brain Games
                         Please enter the game number and press Enter.
                         1 - Greet
                         2 - Even
