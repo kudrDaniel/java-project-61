@@ -16,6 +16,12 @@ public class Engine {
     private static final int INDEX_QUESTION = 2;
     private static final int INDEX_CORRECT_ANSWER = 3;
     private static final int INDEX_USER_ANSWER = 4;
+    private static final int CASE_EVEN = 2;
+    private static final int CASE_CALC = 3;
+    private static final int CASE_GCD = 4;
+    private static final int CASE_PROGRESSION = 5;
+    private static final int CASE_PRIME = 6;
+    private static final int WIN_CONDITION = 3;
     private static final Scanner INPUT_SCANNER = new Scanner(System.in);
     private static final Random RAND_SEQUENCE = new Random(System.currentTimeMillis());
     public static void startGame(int choice) {
@@ -33,31 +39,31 @@ public class Engine {
         //Start cycle
         do {
             switch (choice) {
-                case 2:
+                case CASE_EVEN:
                     gameData[INDEX_RULES] = EvenGuessing.getRules();
                     EvenGuessing.newQuestion();
                     gameData[INDEX_QUESTION] = EvenGuessing.getQuestion();
                     gameData[INDEX_CORRECT_ANSWER] = EvenGuessing.getCorrectAnswer();
                     break;
-                case 3:
+                case CASE_CALC:
                     gameData[INDEX_RULES] = CalcGame.getRules();
                     CalcGame.newQuestion();
                     gameData[INDEX_QUESTION] = CalcGame.getQuestion();
                     gameData[INDEX_CORRECT_ANSWER] = CalcGame.getCorrectAnswer();
                     break;
-                case 4:
+                case CASE_GCD:
                     gameData[INDEX_RULES] = GcdGame.getRules();
                     GcdGame.newQuestion();
                     gameData[INDEX_QUESTION] = GcdGame.getQuestion();
                     gameData[INDEX_CORRECT_ANSWER] = GcdGame.getCorrectAnswer();
                     break;
-                case 5:
+                case CASE_PROGRESSION:
                     gameData[INDEX_RULES] = ProgressionGame.getRules();
                     ProgressionGame.newQuestion();
                     gameData[INDEX_QUESTION] = ProgressionGame.getQuestion();
                     gameData[INDEX_CORRECT_ANSWER] = ProgressionGame.getCorrectAnswer();
                     break;
-                case 6:
+                case CASE_PRIME:
                     gameData[INDEX_RULES] = PrimeNumberGuessing.getRules();
                     PrimeNumberGuessing.newQuestion();
                     gameData[INDEX_QUESTION] = PrimeNumberGuessing.getQuestion();
@@ -91,7 +97,7 @@ public class Engine {
                 );
                 return;
             }
-        } while (winCounter < 3);
+        } while (winCounter < WIN_CONDITION);
         System.out.format("Congratulations, %s!\n", gameData[INDEX_USER_NAME]);
     }
     public static int getRandomInt(int origin, int bound) {

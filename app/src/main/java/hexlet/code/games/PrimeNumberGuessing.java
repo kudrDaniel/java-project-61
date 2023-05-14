@@ -5,11 +5,13 @@ import hexlet.code.Engine;
 public class PrimeNumberGuessing {
     private static String question;
     private static String correctAnswer;
+    private static final int RAND_NUMBER_ORIGIN = 1;
+    private static final int RAND_NUMBER_BOUND = 100;
     public static String getRules() {
         return "Answer 'yes' if given number is prime. Otherwise answer 'no'.";
     }
     public static void newQuestion() {
-        int randNumber = Engine.getRandomInt(1, 100);
+        int randNumber = Engine.getRandomInt(RAND_NUMBER_ORIGIN, RAND_NUMBER_BOUND);
         question = String.format(
                 """
                         Question: %d
@@ -26,8 +28,9 @@ public class PrimeNumberGuessing {
     }
 
     private static boolean isPrimeNumber(int number) {
-        int root = (int) Math.ceil(Math.sqrt((double) number));
-        for (int i = 2; i < root; i++) {
+        int dividerOrigin = 2;
+        int root = (int) Math.ceil(Math.sqrt(number));
+        for (int i = dividerOrigin; i < root; i++) {
             if (number % i == 0) {
                 return false;
             }

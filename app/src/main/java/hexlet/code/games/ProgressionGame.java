@@ -7,15 +7,19 @@ import java.util.StringJoiner;
 public class ProgressionGame {
     private static String question;
     private static String correctAnswer;
+    private static final int PROGRESSION_ORIGIN_ORIGIN = 11;
+    private static final int PROGRESSION_ORIGIN_BOUND = 35;
+    private static final int PROGRESSION_DIFFERENCE_ORIGIN = 2;
+    private static final int PROGRESSION_DIFFERENCE_BOUND = 6;
+    private static final int PROGRESSION_LENGTH = 10;
     public static String getRules() {
         return "What number is missing in the progression?";
     }
     public static void newQuestion() {
-        int randOrigin = Engine.getRandomInt(11, 35);
-        int randDifference = Engine.getRandomInt(2, 6);
-        int randHiddenIndex = Engine.getRandomInt(0, 10);
-        int progressionLength = 10;
-        question = generateProgression(randOrigin, randDifference, randHiddenIndex, progressionLength);
+        int randOrigin = Engine.getRandomInt(PROGRESSION_ORIGIN_ORIGIN, PROGRESSION_ORIGIN_BOUND);
+        int randDifference = Engine.getRandomInt(PROGRESSION_DIFFERENCE_ORIGIN, PROGRESSION_DIFFERENCE_BOUND);
+        int randHiddenIndex = Engine.getRandomInt(PROGRESSION_LENGTH - PROGRESSION_LENGTH, PROGRESSION_LENGTH);
+        question = generateProgression(randOrigin, randDifference, randHiddenIndex);
         question = String.format(
                 """
                         Question: %s
@@ -31,9 +35,9 @@ public class ProgressionGame {
         return correctAnswer;
     }
 
-    private static String generateProgression(int origin, int difference, int hiddenIndex, int length) {
+    private static String generateProgression(int origin, int difference, int hiddenIndex) {
         StringJoiner output = new StringJoiner(" ");
-        for (int i = 0; i < length; i++) {
+        for (int i = 0; i < PROGRESSION_LENGTH; i++) {
             if (i == hiddenIndex) {
                 output.add("..");
             } else {

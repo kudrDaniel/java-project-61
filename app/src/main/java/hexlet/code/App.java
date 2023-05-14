@@ -3,6 +3,7 @@ package hexlet.code;
 import java.util.Scanner;
 
 public class App {
+    private static final int CASE_EXIT = 0;
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.print(
@@ -18,7 +19,7 @@ public class App {
                         Your choice:\s"""
         );
         int choice = scanner.nextInt();
-        if (choice == 0) {
+        if (choice == CASE_EXIT) {
             return;
         }
         System.out.println();

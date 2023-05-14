@@ -5,12 +5,14 @@ import hexlet.code.Engine;
 public class GcdGame {
     private static String question;
     private static String correctAnswer;
+    private static final int RAND_NUMBER_ORIGIN = 1;
+    private static final int RAND_NUMBER_BOUND = 50;
     public static String getRules() {
         return "Find the greatest common divisor of given numbers.";
     }
     public static void newQuestion() {
-        int randNumber1 = Engine.getRandomInt(1, 50);
-        int randNumber2 = Engine.getRandomInt(1, 50);
+        int randNumber1 = Engine.getRandomInt(RAND_NUMBER_ORIGIN, RAND_NUMBER_BOUND);
+        int randNumber2 = Engine.getRandomInt(RAND_NUMBER_ORIGIN, RAND_NUMBER_BOUND);
         question = String.format(
                 """
                         Question: %s %s

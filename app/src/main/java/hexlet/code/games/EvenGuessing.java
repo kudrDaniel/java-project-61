@@ -4,11 +4,13 @@ import hexlet.code.Engine;
 public class EvenGuessing {
     private static String question;
     private static String correctAnswer;
+    private static final int RAND_NUMBER_ORIGIN = 1;
+    private static final int RAND_NUMBER_BOUND = 100;
     public static String getRules() {
         return "Answer 'yes' if the number is even, otherwise answer 'no'.";
     }
     public static void newQuestion() {
-        int randNumber = Engine.getRandomInt(1, 100);
+        int randNumber = Engine.getRandomInt(RAND_NUMBER_ORIGIN, RAND_NUMBER_BOUND);
         question = String.format(
                 """
                         Question: %d
