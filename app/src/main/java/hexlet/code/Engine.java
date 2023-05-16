@@ -9,7 +9,11 @@ import hexlet.code.games.PrimeNumberGuessing;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Engine {
+public class Engine {   //TODO
+                        // Rework the game logic so that
+                        // the engine does not know about
+                        // the existence of game classes,
+                        // but they did
     private static final int DATA_COUNT = 5;
     private static final int INDEX_USER_NAME = 0;
     private static final int INDEX_RULES = 1;
@@ -23,7 +27,6 @@ public class Engine {
     private static final int CASE_PRIME = 6;
     private static final int WIN_CONDITION = 3;
     private static final Scanner INPUT_SCANNER = new Scanner(System.in);
-    private static final Random RAND_SEQUENCE = new Random(System.currentTimeMillis());
     public static void startGame(int choice) {
         int winCounter = 0;
         boolean rulesShowed = false;
@@ -99,8 +102,5 @@ public class Engine {
             }
         } while (winCounter < WIN_CONDITION);
         System.out.format("Congratulations, %s!\n", gameData[INDEX_USER_NAME]);
-    }
-    public static int getRandomInt(int origin, int bound) {
-        return RAND_SEQUENCE.nextInt(origin, bound);
     }
 }

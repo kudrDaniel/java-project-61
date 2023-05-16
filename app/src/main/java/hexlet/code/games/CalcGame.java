@@ -1,8 +1,13 @@
 package hexlet.code.games;
 
 import hexlet.code.Engine;
+import hexlet.code.Utils;
 
-public class CalcGame {
+public class CalcGame { //TODO
+                        // Rework the game logic so that
+                        // the engine does not know about
+                        // the existence of game classes,
+                        // but they did
     private static String question;
     private static String correctAnswer;
     private static final int OPERATION_COUNT = 3;
@@ -12,9 +17,9 @@ public class CalcGame {
         return "What is the result of the expression?";
     }
     public static void newQuestion() {
-        int randOperation = Engine.getRandomInt(OPERATION_COUNT - OPERATION_COUNT, OPERATION_COUNT);
-        int randNumber1 = Engine.getRandomInt(RAND_NUMBER_ORIGIN, RAND_NUMBER_BOUND);
-        int randNumber2 = Engine.getRandomInt(RAND_NUMBER_ORIGIN, RAND_NUMBER_BOUND);
+        int randOperation = Utils.getRandomInt(OPERATION_COUNT - OPERATION_COUNT, OPERATION_COUNT);
+        int randNumber1 = Utils.getRandomInt(RAND_NUMBER_ORIGIN, RAND_NUMBER_BOUND);
+        int randNumber2 = Utils.getRandomInt(RAND_NUMBER_ORIGIN, RAND_NUMBER_BOUND);
         switch (randOperation) {
             case 0 -> {
                 question = randNumber1 + " + " + randNumber2;

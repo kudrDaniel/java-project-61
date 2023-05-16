@@ -1,8 +1,14 @@
 package hexlet.code.games;
 
 import hexlet.code.Engine;
+import hexlet.code.Utils;
 
-public class PrimeNumberGuessing {
+public class PrimeNumberGuessing {  //TODO
+                                    // Naming uniformity
+                                    // Rework the game logic so that
+                                    // the engine does not know about
+                                    // the existence of game classes,
+                                    // but they did
     private static String question;
     private static String correctAnswer;
     private static final int RAND_NUMBER_ORIGIN = 1;
@@ -11,7 +17,7 @@ public class PrimeNumberGuessing {
         return "Answer 'yes' if given number is prime. Otherwise answer 'no'.";
     }
     public static void newQuestion() {
-        int randNumber = Engine.getRandomInt(RAND_NUMBER_ORIGIN, RAND_NUMBER_BOUND);
+        int randNumber = Utils.getRandomInt(RAND_NUMBER_ORIGIN, RAND_NUMBER_BOUND);
         question = String.format(
                 """
                         Question: %d

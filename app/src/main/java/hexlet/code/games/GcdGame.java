@@ -1,8 +1,13 @@
 package hexlet.code.games;
 
 import hexlet.code.Engine;
+import hexlet.code.Utils;
 
-public class GcdGame {
+public class GcdGame {  //TODO
+                        // Rework the game logic so that
+                        // the engine does not know about
+                        // the existence of game classes,
+                        // but they did
     private static String question;
     private static String correctAnswer;
     private static final int RAND_NUMBER_ORIGIN = 1;
@@ -11,8 +16,8 @@ public class GcdGame {
         return "Find the greatest common divisor of given numbers.";
     }
     public static void newQuestion() {
-        int randNumber1 = Engine.getRandomInt(RAND_NUMBER_ORIGIN, RAND_NUMBER_BOUND);
-        int randNumber2 = Engine.getRandomInt(RAND_NUMBER_ORIGIN, RAND_NUMBER_BOUND);
+        int randNumber1 = Utils.getRandomInt(RAND_NUMBER_ORIGIN, RAND_NUMBER_BOUND);
+        int randNumber2 = Utils.getRandomInt(RAND_NUMBER_ORIGIN, RAND_NUMBER_BOUND);
         question = String.format(
                 """
                         Question: %s %s

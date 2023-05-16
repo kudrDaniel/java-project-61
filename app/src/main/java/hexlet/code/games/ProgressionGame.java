@@ -1,10 +1,15 @@
 package hexlet.code.games;
 
 import hexlet.code.Engine;
+import hexlet.code.Utils;
 
 import java.util.StringJoiner;
 
-public class ProgressionGame {
+public class ProgressionGame {  //TODO
+                                // Rework the game logic so that
+                                // the engine does not know about
+                                // the existence of game classes,
+                                // but they did
     private static String question;
     private static String correctAnswer;
     private static final int PROGRESSION_ORIGIN_ORIGIN = 11;
@@ -16,9 +21,9 @@ public class ProgressionGame {
         return "What number is missing in the progression?";
     }
     public static void newQuestion() {
-        int randOrigin = Engine.getRandomInt(PROGRESSION_ORIGIN_ORIGIN, PROGRESSION_ORIGIN_BOUND);
-        int randDifference = Engine.getRandomInt(PROGRESSION_DIFFERENCE_ORIGIN, PROGRESSION_DIFFERENCE_BOUND);
-        int randHiddenIndex = Engine.getRandomInt(PROGRESSION_LENGTH - PROGRESSION_LENGTH, PROGRESSION_LENGTH);
+        int randOrigin = Utils.getRandomInt(PROGRESSION_ORIGIN_ORIGIN, PROGRESSION_ORIGIN_BOUND);
+        int randDifference = Utils.getRandomInt(PROGRESSION_DIFFERENCE_ORIGIN, PROGRESSION_DIFFERENCE_BOUND);
+        int randHiddenIndex = Utils.getRandomInt(PROGRESSION_LENGTH - PROGRESSION_LENGTH, PROGRESSION_LENGTH);
         question = generateProgression(randOrigin, randDifference, randHiddenIndex);
         question = String.format(
                 """
