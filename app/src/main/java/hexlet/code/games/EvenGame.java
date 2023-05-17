@@ -1,14 +1,12 @@
 package hexlet.code.games;
 
-import hexlet.code.Engine;
 import hexlet.code.Utils;
 
-public class EvenGuessing { //TODO
-                            // Naming uniformity
-                            // Rework the game logic so that
-                            // the engine does not know about
-                            // the existence of game classes,
-                            // but they did
+public class EvenGame { //TODO
+                        // Rework the game logic so that
+                        // the engine does not know about
+                        // the existence of game classes,
+                        // but they did
     private static String question;
     private static String correctAnswer;
     private static final int RAND_NUMBER_ORIGIN = 1;
