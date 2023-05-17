@@ -1,12 +1,11 @@
 package hexlet.code;
 
-import hexlet.code.games.EvenGuessing;
+import hexlet.code.games.EvenGame;
 import hexlet.code.games.CalcGame;
 import hexlet.code.games.GcdGame;
 import hexlet.code.games.ProgressionGame;
-import hexlet.code.games.PrimeNumberGuessing;
+import hexlet.code.games.PrimeGame;
 
-import java.util.Random;
 import java.util.Scanner;
 
 public class Engine {   //TODO
@@ -26,7 +25,6 @@ public class Engine {   //TODO
     private static final int CASE_PROGRESSION = 5;
     private static final int CASE_PRIME = 6;
     private static final int WIN_CONDITION = 3;
-    private static final Scanner INPUT_SCANNER = new Scanner(System.in);
     public static void startGame(int choice) {
         int winCounter = 0;
         boolean rulesShowed = false;
@@ -37,16 +35,16 @@ public class Engine {   //TODO
                         Welcome to the Brain Games!
                         May I have your name?\s"""
         );
-        gameData[INDEX_USER_NAME] = INPUT_SCANNER.nextLine();
+        gameData[INDEX_USER_NAME] = App.getInputScanner().nextLine();
         System.out.println("Hello, " + gameData[INDEX_USER_NAME] + "!");
         //Start cycle
         do {
             switch (choice) {
                 case CASE_EVEN:
-                    gameData[INDEX_RULES] = EvenGuessing.getRules();
-                    EvenGuessing.newQuestion();
-                    gameData[INDEX_QUESTION] = EvenGuessing.getQuestion();
-                    gameData[INDEX_CORRECT_ANSWER] = EvenGuessing.getCorrectAnswer();
+                    gameData[INDEX_RULES] = EvenGame.getRules();
+                    EvenGame.newQuestion();
+                    gameData[INDEX_QUESTION] = EvenGame.getQuestion();
+                    gameData[INDEX_CORRECT_ANSWER] = EvenGame.getCorrectAnswer();
                     break;
                 case CASE_CALC:
                     gameData[INDEX_RULES] = CalcGame.getRules();
@@ -67,10 +65,10 @@ public class Engine {   //TODO
                     gameData[INDEX_CORRECT_ANSWER] = ProgressionGame.getCorrectAnswer();
                     break;
                 case CASE_PRIME:
-                    gameData[INDEX_RULES] = PrimeNumberGuessing.getRules();
-                    PrimeNumberGuessing.newQuestion();
-                    gameData[INDEX_QUESTION] = PrimeNumberGuessing.getQuestion();
-                    gameData[INDEX_CORRECT_ANSWER] = PrimeNumberGuessing.getCorrectAnswer();
+                    gameData[INDEX_RULES] = PrimeGame.getRules();
+                    PrimeGame.newQuestion();
+                    gameData[INDEX_QUESTION] = PrimeGame.getQuestion();
+                    gameData[INDEX_CORRECT_ANSWER] = PrimeGame.getCorrectAnswer();
                     break;
                 default:
                     return;
@@ -83,7 +81,7 @@ public class Engine {   //TODO
             //Show question
             System.out.print(gameData[INDEX_QUESTION]);
             //Get answer
-            gameData[INDEX_USER_ANSWER] = INPUT_SCANNER.nextLine();
+            gameData[INDEX_USER_ANSWER] = App.getInputScanner().nextLine();
             //Check answer
             if (gameData[INDEX_USER_ANSWER].equalsIgnoreCase(gameData[INDEX_CORRECT_ANSWER])) {
                 System.out.println("Correct!");
