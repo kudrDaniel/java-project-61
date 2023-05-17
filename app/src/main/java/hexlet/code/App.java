@@ -1,13 +1,19 @@
 package hexlet.code;
 
-import java.util.Scanner;
+import hexlet.code.games.EvenGame;
+import hexlet.code.games.CalcGame;
+import hexlet.code.games.GcdGame;
+import hexlet.code.games.ProgressionGame;
+import hexlet.code.games.PrimeGame;
 
-public class App {  // TODO
-                    // Track that Scanner instance have scanner.close()
-    private static final int CASE_EXIT = 0;
-    private static final Scanner INPUT_SCANNER = new Scanner(System.in);
+public class App {
+    private static final int CASE_GREET = 1;
+    private static final int CASE_EVEN = 2;
+    private static final int CASE_CALC = 3;
+    private static final int CASE_GCD = 4;
+    private static final int CASE_PROGRESSION = 5;
+    private static final int CASE_PRIME = 6;
     public static void main(String[] args) {
-        Scanner INPUT_SCANNER = new Scanner(System.in);
         System.out.print(
                 """
                         Please enter the game number and press Enter.
@@ -20,15 +26,39 @@ public class App {  // TODO
                         0 - Exit
                         Your choice:\s"""
         );
-        int choice = INPUT_SCANNER.nextInt();
-        if (choice == CASE_EXIT) {
-            return;
-        }
+        /* Used nextLine() method cause nextInt() method use next()
+         * method inside. That's why it read \n symbol and return
+         * empty string */
+        String tmpChoice = Utils.readNextLine();
         System.out.println();
-        Engine.startGame(choice);
-        INPUT_SCANNER.close();
-    }
-    public static Scanner getInputScanner() {
-        return INPUT_SCANNER;
+        int choice = 0;
+        try {
+            choice = Integer.parseInt(tmpChoice);
+        } catch (NumberFormatException ex) {
+            System.out.println(ex.getMessage());
+        }
+        switch (choice) {
+            case CASE_GREET:
+                Engine.greeting();
+                break;
+            case CASE_EVEN:
+                EvenGame.run();
+                break;
+            case CASE_CALC:
+                CalcGame.run();
+                break;
+            case CASE_GCD:
+                GcdGame.run();
+                break;
+            case CASE_PROGRESSION:
+                ProgressionGame.run();
+                break;
+            case CASE_PRIME:
+                PrimeGame.run();
+                break;
+            default:
+                break;
+        }
+        Utils.closeInputScanner();
     }
 }

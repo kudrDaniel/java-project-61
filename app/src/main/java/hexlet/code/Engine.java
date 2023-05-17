@@ -1,104 +1,92 @@
 package hexlet.code;
 
-import hexlet.code.games.EvenGame;
-import hexlet.code.games.CalcGame;
-import hexlet.code.games.GcdGame;
-import hexlet.code.games.ProgressionGame;
-import hexlet.code.games.PrimeGame;
+import java.util.Arrays;
 
-import java.util.Scanner;
+public class Engine {
+    public static final int WIN_CONDITION = 3;
+    public static final int INDEX_USER_NAME = 0;
+    public static final int INDEX_RULES = 1;
+    public static final int INDEX_QUESTION = 2;
+    public static final int INDEX_CORRECT_ANSWER = INDEX_QUESTION + WIN_CONDITION;
+    public static final int INDEX_USER_ANSWER = INDEX_CORRECT_ANSWER + WIN_CONDITION;
+    private static final int DATA_COUNT = WIN_CONDITION * 2 + 3;
+    private static int winCounter = 0;
+    private static String[] currentGameData = createGameDataStorage();
 
-public class Engine {   //TODO
-                        // Rework the game logic so that
-                        // the engine does not know about
-                        // the existence of game classes,
-                        // but they did
-    private static final int DATA_COUNT = 5;
-    private static final int INDEX_USER_NAME = 0;
-    private static final int INDEX_RULES = 1;
-    private static final int INDEX_QUESTION = 2;
-    private static final int INDEX_CORRECT_ANSWER = 3;
-    private static final int INDEX_USER_ANSWER = 4;
-    private static final int CASE_EVEN = 2;
-    private static final int CASE_CALC = 3;
-    private static final int CASE_GCD = 4;
-    private static final int CASE_PROGRESSION = 5;
-    private static final int CASE_PRIME = 6;
-    private static final int WIN_CONDITION = 3;
-    public static void startGame(int choice) {
-        int winCounter = 0;
+    public static void startGame(String[] obtainGameData) {
         boolean rulesShowed = false;
-        String[] gameData = new String[DATA_COUNT];
+        //Load data from obtain to current
+        loadGameData(obtainGameData);
         //Start by greeting
+        greeting();
+        //Start cycle
+        do {
+            //Show rules
+            if (!rulesShowed) {
+                showRules();
+                rulesShowed = true;
+            }
+            //Show question
+            showQuestion(winCounter);
+            //Get answer
+            getAnswer();
+            //Check answer
+            if (!showCheckPass(checkAnswer(winCounter))) {
+                return;
+            }
+        } while (winCounter < WIN_CONDITION);
+        //Show congratulations
+        showCongratulations();
+    }
+
+    public static String[] createGameDataStorage() {
+        return new String[DATA_COUNT];
+    }
+    public static void greeting() {
         System.out.print(
                 """
                         Welcome to the Brain Games!
                         May I have your name?\s"""
         );
-        gameData[INDEX_USER_NAME] = App.getInputScanner().nextLine();
-        System.out.println("Hello, " + gameData[INDEX_USER_NAME] + "!");
-        //Start cycle
-        do {
-            switch (choice) {
-                case CASE_EVEN:
-                    gameData[INDEX_RULES] = EvenGame.getRules();
-                    EvenGame.newQuestion();
-                    gameData[INDEX_QUESTION] = EvenGame.getQuestion();
-                    gameData[INDEX_CORRECT_ANSWER] = EvenGame.getCorrectAnswer();
-                    break;
-                case CASE_CALC:
-                    gameData[INDEX_RULES] = CalcGame.getRules();
-                    CalcGame.newQuestion();
-                    gameData[INDEX_QUESTION] = CalcGame.getQuestion();
-                    gameData[INDEX_CORRECT_ANSWER] = CalcGame.getCorrectAnswer();
-                    break;
-                case CASE_GCD:
-                    gameData[INDEX_RULES] = GcdGame.getRules();
-                    GcdGame.newQuestion();
-                    gameData[INDEX_QUESTION] = GcdGame.getQuestion();
-                    gameData[INDEX_CORRECT_ANSWER] = GcdGame.getCorrectAnswer();
-                    break;
-                case CASE_PROGRESSION:
-                    gameData[INDEX_RULES] = ProgressionGame.getRules();
-                    ProgressionGame.newQuestion();
-                    gameData[INDEX_QUESTION] = ProgressionGame.getQuestion();
-                    gameData[INDEX_CORRECT_ANSWER] = ProgressionGame.getCorrectAnswer();
-                    break;
-                case CASE_PRIME:
-                    gameData[INDEX_RULES] = PrimeGame.getRules();
-                    PrimeGame.newQuestion();
-                    gameData[INDEX_QUESTION] = PrimeGame.getQuestion();
-                    gameData[INDEX_CORRECT_ANSWER] = PrimeGame.getCorrectAnswer();
-                    break;
-                default:
-                    return;
-            }
-            //Show rules
-            if (!rulesShowed) {
-                System.out.println(gameData[INDEX_RULES]);
-                rulesShowed = true;
-            }
-            //Show question
-            System.out.print(gameData[INDEX_QUESTION]);
-            //Get answer
-            gameData[INDEX_USER_ANSWER] = App.getInputScanner().nextLine();
-            //Check answer
-            if (gameData[INDEX_USER_ANSWER].equalsIgnoreCase(gameData[INDEX_CORRECT_ANSWER])) {
-                System.out.println("Correct!");
-                winCounter++;
-            } else {
-                System.out.format(
-                        """
-                            '%s' is wrong answer ;(. Correct answer was '%s'
-                            Let's try again, %s!
-                            """,
-                        gameData[INDEX_USER_ANSWER],
-                        gameData[INDEX_CORRECT_ANSWER],
-                        gameData[INDEX_USER_NAME]
-                );
-                return;
-            }
-        } while (winCounter < WIN_CONDITION);
-        System.out.format("Congratulations, %s!\n", gameData[INDEX_USER_NAME]);
+        currentGameData[INDEX_USER_NAME] = Utils.readNextLine();
+        System.out.println("Hello, " + currentGameData[INDEX_USER_NAME] + "!");
+    }
+
+    private static void loadGameData(String[] obtainGameData) {
+        currentGameData = Arrays.copyOf(obtainGameData, DATA_COUNT);
+    }
+    private static void showRules() {
+        System.out.println(currentGameData[INDEX_RULES]);
+    }
+    private static void showQuestion(int questionNumber) {
+        int currentQuestionIndex = INDEX_QUESTION + questionNumber;
+        System.out.print(currentGameData[currentQuestionIndex]);
+    }
+    private static void getAnswer() {
+        currentGameData[INDEX_USER_ANSWER] = Utils.readNextLine();
+    }
+    private static boolean checkAnswer(int questionNumber) {
+        int currentCorrectAnswerIndex = INDEX_CORRECT_ANSWER + questionNumber;
+        return currentGameData[INDEX_USER_ANSWER].equalsIgnoreCase(currentGameData[currentCorrectAnswerIndex]);
+    }
+    private static boolean showCheckPass(boolean check) {
+        if (check) {
+            System.out.println("Correct!");
+            winCounter++;
+        } else {
+            System.out.format(
+                    """
+                        '%s' is wrong answer ;(. Correct answer was '%s'
+                        Let's try again, %s!
+                        """,
+                    currentGameData[INDEX_USER_ANSWER],
+                    currentGameData[INDEX_CORRECT_ANSWER],
+                    currentGameData[INDEX_USER_NAME]
+            );
+        }
+        return check;
+    }
+    private static void showCongratulations() {
+        System.out.format("Congratulations, %s!\n", currentGameData[INDEX_USER_NAME]);
     }
 }

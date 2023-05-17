@@ -5,11 +5,7 @@ import hexlet.code.Utils;
 
 import java.util.StringJoiner;
 
-public class ProgressionGame {  //TODO
-                                // Rework the game logic so that
-                                // the engine does not know about
-                                // the existence of game classes,
-                                // but they did
+public class ProgressionGame {
     private static String question;
     private static String correctAnswer;
     private static final int PROGRESSION_ORIGIN_ORIGIN = 11;
@@ -17,13 +13,21 @@ public class ProgressionGame {  //TODO
     private static final int PROGRESSION_DIFFERENCE_ORIGIN = 2;
     private static final int PROGRESSION_DIFFERENCE_BOUND = 6;
     private static final int PROGRESSION_LENGTH = 10;
+    public static void run() {
+        String[] gameData = Engine.createGameDataStorage();
+        gameData[Engine.INDEX_RULES] = getRules();
+        newQuestion();
+        gameData[Engine.INDEX_QUESTION] = getQuestion();
+        gameData[Engine.INDEX_CORRECT_ANSWER] = getCorrectAnswer();
+        Engine.startGame(gameData);
+    }
     public static String getRules() {
         return "What number is missing in the progression?";
     }
     public static void newQuestion() {
         int randOrigin = Utils.getRandomInt(PROGRESSION_ORIGIN_ORIGIN, PROGRESSION_ORIGIN_BOUND);
         int randDifference = Utils.getRandomInt(PROGRESSION_DIFFERENCE_ORIGIN, PROGRESSION_DIFFERENCE_BOUND);
-        int randHiddenIndex = Utils.getRandomInt(PROGRESSION_LENGTH - PROGRESSION_LENGTH, PROGRESSION_LENGTH);
+        int randHiddenIndex = Utils.getRandomInt(0, PROGRESSION_LENGTH);
         question = generateProgression(randOrigin, randDifference, randHiddenIndex);
         question = String.format(
                 """

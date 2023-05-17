@@ -1,21 +1,28 @@
 package hexlet.code.games;
 
+import hexlet.code.Engine;
 import hexlet.code.Utils;
 
-public class EvenGame { //TODO
-                        // Rework the game logic so that
-                        // the engine does not know about
-                        // the existence of game classes,
-                        // but they did
+public class EvenGame {
     private static String question;
     private static String correctAnswer;
-    private static final int RAND_NUMBER_ORIGIN = 1;
-    private static final int RAND_NUMBER_BOUND = 100;
+    public static void run() {
+        String[] gameData = Engine.createGameDataStorage();
+        gameData[Engine.INDEX_RULES] = getRules();
+        for (int i = 0; i < Engine.WIN_CONDITION; i++) {
+            int currentQuestionIndex = Engine.INDEX_QUESTION + i;
+            int currentCorrectAnswerIndex = Engine.INDEX_CORRECT_ANSWER + i;
+            newQuestion();
+            gameData[currentQuestionIndex] = getQuestion();
+            gameData[currentCorrectAnswerIndex] = getCorrectAnswer();
+        }
+        Engine.startGame(gameData);
+    }
     public static String getRules() {
         return "Answer 'yes' if the number is even, otherwise answer 'no'.";
     }
     public static void newQuestion() {
-        int randNumber = Utils.getRandomInt(RAND_NUMBER_ORIGIN, RAND_NUMBER_BOUND);
+        int randNumber = Utils.getRandomInt();
         question = String.format(
                 """
                         Question: %d
