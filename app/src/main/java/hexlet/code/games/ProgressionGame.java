@@ -16,9 +16,13 @@ public class ProgressionGame {
     public static void run() {
         String[] gameData = Engine.createGameDataStorage();
         gameData[Engine.INDEX_RULES] = getRules();
-        newQuestion();
-        gameData[Engine.INDEX_QUESTION] = getQuestion();
-        gameData[Engine.INDEX_CORRECT_ANSWER] = getCorrectAnswer();
+        for (int i = 0; i < Engine.WIN_CONDITION; i++) {
+            int currentQuestionIndex = Engine.INDEX_QUESTION + i;
+            int currentCorrectAnswerIndex = Engine.INDEX_CORRECT_ANSWER + i;
+            newQuestion();
+            gameData[currentQuestionIndex] = getQuestion();
+            gameData[currentCorrectAnswerIndex] = getCorrectAnswer();
+        }
         Engine.startGame(gameData);
     }
     public static String getRules() {
