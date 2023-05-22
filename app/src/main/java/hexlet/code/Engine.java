@@ -11,64 +11,58 @@ public class Engine {
     public static final int INDEX_USER_ANSWER = INDEX_CORRECT_ANSWER + WIN_CONDITION;
     private static final int DATA_COUNT = WIN_CONDITION * 2 + 3;
     private static int winCounter = 0;
-    private static String[] currentGameData = createGameDataStorage();
+    private static String[] gameDataStorage = createGameDataStorage();
 
-    public static void startGame(String[] obtainGameData) {
+    public static void startGame(String[] gameData) {
         boolean rulesShowed = false;
         //Load data from obtain to current
-        loadGameData(obtainGameData);
+        gameDataStorage = Arrays.copyOf(gameData, DATA_COUNT);
         //Start by greeting
         greeting();
         //Start cycle
         do {
             //Show rules
             if (!rulesShowed) {
-                showRules();
+                System.out.println(gameDataStorage[INDEX_RULES]);
                 rulesShowed = true;
             }
             //Show question
             showQuestion(winCounter);
             //Get answer
-            getAnswer();
+            gameDataStorage[INDEX_USER_ANSWER] = Utils.readNextLine();
             //Check answer
             if (!showCheckPass(checkAnswer(winCounter))) {
                 return;
             }
         } while (winCounter < WIN_CONDITION);
         //Show congratulations
-        showCongratulations();
+        System.out.format("Congratulations, %s!\n", gameDataStorage[INDEX_USER_NAME]);
     }
 
     public static String[] createGameDataStorage() {
         return new String[DATA_COUNT];
     }
+
     public static void greeting() {
         System.out.print(
                 """
                         Welcome to the Brain Games!
                         May I have your name?\s"""
         );
-        currentGameData[INDEX_USER_NAME] = Utils.readNextLine();
-        System.out.println("Hello, " + currentGameData[INDEX_USER_NAME] + "!");
+        gameDataStorage[INDEX_USER_NAME] = Utils.readNextLine();
+        System.out.println("Hello, " + gameDataStorage[INDEX_USER_NAME] + "!");
     }
 
-    private static void loadGameData(String[] obtainGameData) {
-        currentGameData = Arrays.copyOf(obtainGameData, DATA_COUNT);
-    }
-    private static void showRules() {
-        System.out.println(currentGameData[INDEX_RULES]);
-    }
     private static void showQuestion(int questionNumber) {
         int currentQuestionIndex = INDEX_QUESTION + questionNumber;
-        System.out.print(currentGameData[currentQuestionIndex]);
+        System.out.print(gameDataStorage[currentQuestionIndex]);
     }
-    private static void getAnswer() {
-        currentGameData[INDEX_USER_ANSWER] = Utils.readNextLine();
-    }
+
     private static boolean checkAnswer(int questionNumber) {
         int currentCorrectAnswerIndex = INDEX_CORRECT_ANSWER + questionNumber;
-        return currentGameData[INDEX_USER_ANSWER].equalsIgnoreCase(currentGameData[currentCorrectAnswerIndex]);
+        return gameDataStorage[INDEX_USER_ANSWER].equalsIgnoreCase(gameDataStorage[currentCorrectAnswerIndex]);
     }
+
     private static boolean showCheckPass(boolean check) {
         if (check) {
             System.out.println("Correct!");
@@ -79,14 +73,11 @@ public class Engine {
                         '%s' is wrong answer ;(. Correct answer was '%s'
                         Let's try again, %s!
                         """,
-                    currentGameData[INDEX_USER_ANSWER],
-                    currentGameData[INDEX_CORRECT_ANSWER],
-                    currentGameData[INDEX_USER_NAME]
+                    gameDataStorage[INDEX_USER_ANSWER],
+                    gameDataStorage[INDEX_CORRECT_ANSWER],
+                    gameDataStorage[INDEX_USER_NAME]
             );
         }
         return check;
-    }
-    private static void showCongratulations() {
-        System.out.format("Congratulations, %s!\n", currentGameData[INDEX_USER_NAME]);
     }
 }
