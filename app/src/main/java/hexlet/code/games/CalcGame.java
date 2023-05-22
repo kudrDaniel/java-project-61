@@ -4,27 +4,26 @@ import hexlet.code.Engine;
 import hexlet.code.Utils;
 
 public class CalcGame {
-    private static String question;
-    private static String correctAnswer;
     private static final int OPERATION_PLUS = 0;
     private static final int OPERATION_SUB = 1;
     private static final int RAND_NUMBER_ORIGIN = 1;
     private static final int RAND_NUMBER_BOUND = 50;
+    private static String question;
+    private static String correctAnswer;
+
     public static void run() {
         String[] gameData = Engine.createGameDataStorage();
-        gameData[Engine.INDEX_RULES] = getRules();
+        gameData[Engine.INDEX_RULES] = "What is the result of the expression?";
         for (int i = 0; i < Engine.WIN_CONDITION; i++) {
             int currentQuestionIndex = Engine.INDEX_QUESTION + i;
             int currentCorrectAnswerIndex = Engine.INDEX_CORRECT_ANSWER + i;
             newQuestion();
-            gameData[currentQuestionIndex] = getQuestion();
-            gameData[currentCorrectAnswerIndex] = getCorrectAnswer();
+            gameData[currentQuestionIndex] = question;
+            gameData[currentCorrectAnswerIndex] = correctAnswer;
         }
         Engine.startGame(gameData);
     }
-    public static String getRules() {
-        return "What is the result of the expression?";
-    }
+
     public static void newQuestion() {
         int randOperation = Utils.getRandomOperation();
         int randNumber1 = Utils.getRandomInt(RAND_NUMBER_ORIGIN, RAND_NUMBER_BOUND);
@@ -49,11 +48,5 @@ public class CalcGame {
                         Your answer:\s""",
                 question
         );
-    }
-    public static String getQuestion() {
-        return question;
-    }
-    public static String getCorrectAnswer() {
-        return correctAnswer;
     }
 }
