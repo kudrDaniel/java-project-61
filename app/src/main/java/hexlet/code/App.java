@@ -13,6 +13,7 @@ public class App {
     private static final int CASE_GCD = 4;
     private static final int CASE_PROGRESSION = 5;
     private static final int CASE_PRIME = 6;
+
     public static void main(String[] args) {
         System.out.print(
                 """
