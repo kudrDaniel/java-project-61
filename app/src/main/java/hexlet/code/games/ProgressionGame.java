@@ -3,8 +3,6 @@ package hexlet.code.games;
 import hexlet.code.Engine;
 import hexlet.code.Utils;
 
-import java.util.StringJoiner;
-
 public class ProgressionGame {
     private static final int PROGRESSION_ORIGIN_ORIGIN = 11;
     private static final int PROGRESSION_ORIGIN_BOUND = 35;
@@ -15,16 +13,15 @@ public class ProgressionGame {
     private static String correctAnswer;
 
     public static void run() {
-        String[] gameData = Engine.createGameDataStorage();
-        gameData[Engine.INDEX_RULES] = "What number is missing in the progression?";
+        String gameRules = "What number is missing in the progression?";
+        String[] gameQuestions = new String[Engine.WIN_CONDITION];
+        String[] gameAnswers = new String[Engine.WIN_CONDITION];
         for (int i = 0; i < Engine.WIN_CONDITION; i++) {
-            int currentQuestionIndex = Engine.INDEX_QUESTION + i;
-            int currentCorrectAnswerIndex = Engine.INDEX_CORRECT_ANSWER + i;
             newQuestion();
-            gameData[currentQuestionIndex] = question;
-            gameData[currentCorrectAnswerIndex] = correctAnswer;
+            gameQuestions[i] = question;
+            gameAnswers[i] = correctAnswer;
         }
-        Engine.startGame(gameData);
+        Engine.startGame(gameRules, gameQuestions,gameAnswers);
     }
 
     public static void newQuestion() {
@@ -42,14 +39,14 @@ public class ProgressionGame {
     }
 
     private static String generateProgression(int origin, int difference, int hiddenIndex) {
-        StringJoiner output = new StringJoiner(" ");
+        String[] output = new String[PROGRESSION_LENGTH];
         for (int i = 0; i < PROGRESSION_LENGTH; i++) {
             if (i == hiddenIndex) {
-                output.add("..");
+                output[i] = "..";
             } else {
-                output.add(Integer.toString(origin + i * difference));
+                output[i] = Integer.toString(origin + i * difference);
             }
         }
-        return output.toString();
+        return String.join(" ", output);
     }
 }

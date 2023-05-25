@@ -4,7 +4,6 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Utils {
-    private static final int OPERATION_COUNT = 3;
     private static final int RAND_NUMBER_DEFAULT_ORIGIN = 1;
     private static final int RAND_NUMBER_DEFAULT_BOUND = 100;
     private static final Scanner INPUT_SCANNER = new Scanner(System.in);
@@ -24,9 +23,5 @@ public class Utils {
 
     public static int getRandomInt() {
         return getRandomInt(RAND_NUMBER_DEFAULT_ORIGIN, RAND_NUMBER_DEFAULT_BOUND);
-    }
-
-    public static int getRandomOperation() {
-        return getRandomInt(0, OPERATION_COUNT);
     }
 }

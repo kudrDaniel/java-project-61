@@ -7,12 +7,12 @@ import hexlet.code.games.ProgressionGame;
 import hexlet.code.games.PrimeGame;
 
 public class App {
-    private static final int CASE_GREET = 1;
-    private static final int CASE_EVEN = 2;
-    private static final int CASE_CALC = 3;
-    private static final int CASE_GCD = 4;
-    private static final int CASE_PROGRESSION = 5;
-    private static final int CASE_PRIME = 6;
+    private static final String CASE_GREET = "1";
+    private static final String CASE_EVEN = "2";
+    private static final String CASE_CALC = "3";
+    private static final String CASE_GCD = "4";
+    private static final String CASE_PROGRESSION = "5";
+    private static final String CASE_PRIME = "6";
 
     public static void main(String[] args) {
         System.out.print(
@@ -30,14 +30,8 @@ public class App {
         /* Used nextLine() method cause nextInt() method use next()
          * method inside. That's why it read \n symbol and return
          * empty string */
-        String tmpChoice = Utils.readNextLine();
+        String choice = Utils.readNextLine();
         System.out.println();
-        int choice = 0;
-        try {
-            choice = Integer.parseInt(tmpChoice);
-        } catch (NumberFormatException ex) {
-            System.out.println(ex.getMessage());
-        }
         switch (choice) {
             case CASE_GREET:
                 Engine.greeting();
@@ -58,6 +52,7 @@ public class App {
                 PrimeGame.run();
                 break;
             default:
+                System.out.println("You choose something wrong!\nPlease restart and try again.");
                 break;
         }
         Utils.closeInputScanner();

@@ -4,6 +4,7 @@ import hexlet.code.Engine;
 import hexlet.code.Utils;
 
 public class CalcGame {
+    private static final int OPERATION_COUNT = 3;
     private static final int OPERATION_PLUS = 0;
     private static final int OPERATION_SUB = 1;
     private static final int RAND_NUMBER_ORIGIN = 1;
@@ -12,20 +13,19 @@ public class CalcGame {
     private static String correctAnswer;
 
     public static void run() {
-        String[] gameData = Engine.createGameDataStorage();
-        gameData[Engine.INDEX_RULES] = "What is the result of the expression?";
+        String gameRules = "What is the result of the expression?";
+        String[] gameQuestions = new String[Engine.WIN_CONDITION];
+        String[] gameAnswers = new String[Engine.WIN_CONDITION];
         for (int i = 0; i < Engine.WIN_CONDITION; i++) {
-            int currentQuestionIndex = Engine.INDEX_QUESTION + i;
-            int currentCorrectAnswerIndex = Engine.INDEX_CORRECT_ANSWER + i;
             newQuestion();
-            gameData[currentQuestionIndex] = question;
-            gameData[currentCorrectAnswerIndex] = correctAnswer;
+            gameQuestions[i] = question;
+            gameAnswers[i] = correctAnswer;
         }
-        Engine.startGame(gameData);
+        Engine.startGame(gameRules, gameQuestions, gameAnswers);
     }
 
     public static void newQuestion() {
-        int randOperation = Utils.getRandomOperation();
+        int randOperation = getRandomOperation();
         int randNumber1 = Utils.getRandomInt(RAND_NUMBER_ORIGIN, RAND_NUMBER_BOUND);
         int randNumber2 = Utils.getRandomInt(RAND_NUMBER_ORIGIN, RAND_NUMBER_BOUND);
         switch (randOperation) {
@@ -48,5 +48,9 @@ public class CalcGame {
                         Your answer:\s""",
                 question
         );
+    }
+
+    private static int getRandomOperation() {
+        return Utils.getRandomInt(0, OPERATION_COUNT);
     }
 }
