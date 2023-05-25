@@ -8,13 +8,13 @@ public class Engine {
         int winCounter = 0;
         //Start by greeting
         String userName = greeting();
+        //Show rules
+        if (!rulesShowed) {
+            System.out.println(gameRules);
+            rulesShowed = true;
+        }
         //Start cycle
         do {
-            //Show rules
-            if (!rulesShowed) {
-                System.out.println(gameRules);
-                rulesShowed = true;
-            }
             //Show question
             System.out.print(gameQuestions[winCounter]);
             //Get answer
