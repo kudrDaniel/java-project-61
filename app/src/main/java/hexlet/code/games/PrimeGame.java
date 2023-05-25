@@ -16,7 +16,7 @@ public class PrimeGame {
             gameQuestions[i] = question;
             gameAnswers[i] = correctAnswer;
         }
-        Engine.startGame(gameRules, gameQuestions,gameAnswers);
+        Engine.startGame(gameRules, gameQuestions, gameAnswers);
     }
 
     public static void newQuestion() {
