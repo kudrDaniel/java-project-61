@@ -2,8 +2,11 @@ package hexlet.code;
 
 public class Engine {
     public static final int WIN_CONDITION = 3;
+    public static final int LENGTH_GAME_DATA = 2;
+    public static final int INDEX_QUESTION = 0;
+    public static final int INDEX_ANSWER = 1;
 
-    public static void startGame(String gameRules, String[] gameQuestions, String[] gameAnswers) {
+    public static void startGame(String gameRules, String[][] gameData) {
         boolean rulesShowed = false;
         int winCounter = 0;
         //Start by greeting
@@ -16,11 +19,11 @@ public class Engine {
         //Start cycle
         do {
             //Show question
-            System.out.print(gameQuestions[winCounter]);
+            System.out.print(gameData[winCounter][INDEX_QUESTION]);
             //Get answer
             String userAnswer = Utils.readNextLine();
             //Check answer
-            if (gameAnswers[winCounter].equalsIgnoreCase(userAnswer)) {
+            if (gameData[winCounter][INDEX_ANSWER].equalsIgnoreCase(userAnswer)) {
                 System.out.println("Correct!");
                 winCounter++;
             } else {
@@ -30,7 +33,7 @@ public class Engine {
                             Let's try again, %s!
                             """,
                         userAnswer,
-                        gameAnswers[winCounter],
+                        gameData[winCounter][INDEX_ANSWER],
                         userName
                 );
                 return;

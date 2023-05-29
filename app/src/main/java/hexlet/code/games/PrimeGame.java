@@ -9,25 +9,24 @@ public class PrimeGame {
 
     public static void run() {
         String gameRules = "Answer 'yes' if given number is prime. Otherwise answer 'no'.";
-        String[] gameQuestions = new String[Engine.WIN_CONDITION];
-        String[] gameAnswers = new String[Engine.WIN_CONDITION];
+        String[][] gameData = new String[Engine.WIN_CONDITION][Engine.LENGTH_GAME_DATA];
         for (int i = 0; i < Engine.WIN_CONDITION; i++) {
             newQuestion();
-            gameQuestions[i] = question;
-            gameAnswers[i] = correctAnswer;
+            gameData[i][Engine.INDEX_QUESTION] = question;
+            gameData[i][Engine.INDEX_ANSWER] = correctAnswer;
         }
-        Engine.startGame(gameRules, gameQuestions, gameAnswers);
+        Engine.startGame(gameRules, gameData);
     }
 
     public static void newQuestion() {
         int randNumber = Utils.getRandomInt();
+        correctAnswer = isPrimeNumber(randNumber) ? "yes" : "no";
         question = String.format(
                 """
                         Question: %d
                         Your answer:\s""",
                 randNumber
         );
-        correctAnswer = isPrimeNumber(randNumber) ? "yes" : "no";
     }
 
     private static boolean isPrimeNumber(int number) {

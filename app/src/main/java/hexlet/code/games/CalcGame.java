@@ -14,32 +14,29 @@ public class CalcGame {
 
     public static void run() {
         String gameRules = "What is the result of the expression?";
-        String[] gameQuestions = new String[Engine.WIN_CONDITION];
-        String[] gameAnswers = new String[Engine.WIN_CONDITION];
+        String[][] gameData = new String[Engine.WIN_CONDITION][Engine.LENGTH_GAME_DATA];
         for (int i = 0; i < Engine.WIN_CONDITION; i++) {
             newQuestion();
-            gameQuestions[i] = question;
-            gameAnswers[i] = correctAnswer;
+            gameData[i][Engine.INDEX_QUESTION] = question;
+            gameData[i][Engine.INDEX_ANSWER] = correctAnswer;
         }
-        Engine.startGame(gameRules, gameQuestions, gameAnswers);
+        Engine.startGame(gameRules, gameData);
     }
 
     public static void newQuestion() {
         int randOperation = getRandomOperation();
         int randNumber1 = Utils.getRandomInt(RAND_NUMBER_ORIGIN, RAND_NUMBER_BOUND);
         int randNumber2 = Utils.getRandomInt(RAND_NUMBER_ORIGIN, RAND_NUMBER_BOUND);
+        correctAnswer = calculate(randNumber1, randNumber2, randOperation);
         switch (randOperation) {
             case OPERATION_PLUS:
                 question = randNumber1 + " + " + randNumber2;
-                correctAnswer = Integer.toString(randNumber1 + randNumber2);
                 break;
             case OPERATION_SUB:
                 question = randNumber1 + " - " + randNumber2;
-                correctAnswer = Integer.toString(randNumber1 - randNumber2);
                 break;
             default:
                 question = randNumber1 + " * " + randNumber2;
-                correctAnswer = Integer.toString(randNumber1 * randNumber2);
                 break;
         }
         question = String.format(
@@ -48,6 +45,17 @@ public class CalcGame {
                         Your answer:\s""",
                 question
         );
+    }
+
+    private static String calculate(int number1, int number2, int operation) {
+        switch (operation) {
+            case OPERATION_PLUS:
+                return Integer.toString(number1 + number2);
+            case OPERATION_SUB:
+                return Integer.toString(number1 - number2);
+            default:
+                return Integer.toString(number1 * number2);
+        }
     }
 
     private static int getRandomOperation() {

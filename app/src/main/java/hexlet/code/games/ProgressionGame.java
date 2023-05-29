@@ -14,39 +14,36 @@ public class ProgressionGame {
 
     public static void run() {
         String gameRules = "What number is missing in the progression?";
-        String[] gameQuestions = new String[Engine.WIN_CONDITION];
-        String[] gameAnswers = new String[Engine.WIN_CONDITION];
+        String[][] gameData = new String[Engine.WIN_CONDITION][Engine.LENGTH_GAME_DATA];
         for (int i = 0; i < Engine.WIN_CONDITION; i++) {
             newQuestion();
-            gameQuestions[i] = question;
-            gameAnswers[i] = correctAnswer;
+            gameData[i][Engine.INDEX_QUESTION] = question;
+            gameData[i][Engine.INDEX_ANSWER] = correctAnswer;
         }
-        Engine.startGame(gameRules, gameQuestions, gameAnswers);
+        Engine.startGame(gameRules, gameData);
     }
 
     public static void newQuestion() {
         int randOrigin = Utils.getRandomInt(PROGRESSION_ORIGIN_ORIGIN, PROGRESSION_ORIGIN_BOUND);
         int randDifference = Utils.getRandomInt(PROGRESSION_DIFFERENCE_ORIGIN, PROGRESSION_DIFFERENCE_BOUND);
         int randHiddenIndex = Utils.getRandomInt(0, PROGRESSION_LENGTH);
-        question = generateProgression(randOrigin, randDifference, randHiddenIndex);
+        String[] progression = generateProgression(randOrigin, randDifference, randHiddenIndex);
+        correctAnswer = progression[randHiddenIndex];
+        progression[randHiddenIndex] = "..";
+        question = String.join(" ", progression);
         question = String.format(
                 """
                         Question: %s
                         Your answer:\s""",
                 question
         );
-        correctAnswer = Integer.toString(randOrigin + randHiddenIndex * randDifference);
     }
 
-    private static String generateProgression(int origin, int difference, int hiddenIndex) {
+    private static String[] generateProgression(int origin, int difference, int hiddenIndex) {
         String[] output = new String[PROGRESSION_LENGTH];
         for (int i = 0; i < PROGRESSION_LENGTH; i++) {
-            if (i == hiddenIndex) {
-                output[i] = "..";
-            } else {
-                output[i] = Integer.toString(origin + i * difference);
-            }
+            output[i] = Integer.toString(origin + i * difference);
         }
-        return String.join(" ", output);
+        return output;
     }
 }

@@ -9,19 +9,19 @@ public class GcdGame {
 
     public static void run() {
         String gameRules = "Find the greatest common divisor of given numbers.";
-        String[] gameQuestions = new String[Engine.WIN_CONDITION];
-        String[] gameAnswers = new String[Engine.WIN_CONDITION];
+        String[][] gameData = new String[Engine.WIN_CONDITION][Engine.LENGTH_GAME_DATA];
         for (int i = 0; i < Engine.WIN_CONDITION; i++) {
             newQuestion();
-            gameQuestions[i] = question;
-            gameAnswers[i] = correctAnswer;
+            gameData[i][Engine.INDEX_QUESTION] = question;
+            gameData[i][Engine.INDEX_ANSWER] = correctAnswer;
         }
-        Engine.startGame(gameRules, gameQuestions, gameAnswers);
+        Engine.startGame(gameRules, gameData);
     }
 
     public static void newQuestion() {
         int randNumber1 = Utils.getRandomInt();
         int randNumber2 = Utils.getRandomInt();
+        correctAnswer = gcd(randNumber1, randNumber2);
         question = String.format(
                 """
                         Question: %s %s
@@ -29,10 +29,10 @@ public class GcdGame {
                 randNumber1,
                 randNumber2
         );
-        correctAnswer = Integer.toString(gcd(randNumber1, randNumber2));
     }
 
-    private static int gcd(int numb1, int numb2) {
-        return (numb1 % numb2 == 0) ? Math.abs(numb2) : gcd(numb2, numb1 % numb2);
+    private static String gcd(int numb1, int numb2) {
+        int gcd = (numb1 % numb2 == 0) ? Math.abs(numb2) : Integer.parseInt(gcd(numb2, numb1 % numb2));
+        return Integer.toString(gcd);
     }
 }
