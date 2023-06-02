@@ -4,9 +4,10 @@ import hexlet.code.Engine;
 import hexlet.code.Utils;
 
 public class CalcGame {
-    private static final int OPERATION_COUNT = 3;
     private static final int OPERATION_PLUS = 0;
     private static final int OPERATION_SUB = 1;
+    private static final int OPERATION_MUL = 2;
+    private static final String[] OPERATIONS = {" + ", " - ", " * "};
     private static final int RAND_NUMBER_ORIGIN = 1;
     private static final int RAND_NUMBER_BOUND = 50;
     private static String question;
@@ -27,38 +28,25 @@ public class CalcGame {
         int randOperation = getRandomOperation();
         int randNumber1 = Utils.getRandomInt(RAND_NUMBER_ORIGIN, RAND_NUMBER_BOUND);
         int randNumber2 = Utils.getRandomInt(RAND_NUMBER_ORIGIN, RAND_NUMBER_BOUND);
-        correctAnswer = calculate(randNumber1, randNumber2, randOperation);
-        switch (randOperation) {
-            case OPERATION_PLUS:
-                question = randNumber1 + " + " + randNumber2;
-                break;
-            case OPERATION_SUB:
-                question = randNumber1 + " - " + randNumber2;
-                break;
-            default:
-                question = randNumber1 + " * " + randNumber2;
-                break;
-        }
-        question = String.format(
-                """
-                        Question: %s
-                        Your answer:\s""",
-                question
-        );
+        correctAnswer = Integer.toString(calculate(randNumber1, randNumber2, randOperation));
+        question = randNumber1 + OPERATIONS[randOperation] + randNumber2;
     }
 
-    private static String calculate(int number1, int number2, int operation) {
+    private static int calculate(int number1, int number2, int operation) {
         switch (operation) {
             case OPERATION_PLUS:
-                return Integer.toString(number1 + number2);
+                return number1 + number2;
             case OPERATION_SUB:
-                return Integer.toString(number1 - number2);
+                return number1 - number2;
+            case OPERATION_MUL:
+                return number1 * number2;
             default:
-                return Integer.toString(number1 * number2);
+                System.out.println("Something wrong with operation index");
+                return 0;
         }
     }
 
     private static int getRandomOperation() {
-        return Utils.getRandomInt(0, OPERATION_COUNT);
+        return Utils.getRandomInt(0, OPERATIONS.length);
     }
 }

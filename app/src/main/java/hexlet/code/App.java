@@ -34,7 +34,7 @@ public class App {
         System.out.println();
         switch (choice) {
             case CASE_GREET:
-                Engine.greeting();
+                Cli.greeting();
                 break;
             case CASE_EVEN:
                 EvenGame.run();

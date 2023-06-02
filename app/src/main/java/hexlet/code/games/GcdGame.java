@@ -21,18 +21,11 @@ public class GcdGame {
     public static void newQuestion() {
         int randNumber1 = Utils.getRandomInt();
         int randNumber2 = Utils.getRandomInt();
-        correctAnswer = gcd(randNumber1, randNumber2);
-        question = String.format(
-                """
-                        Question: %s %s
-                        Your answer:\s""",
-                randNumber1,
-                randNumber2
-        );
+        correctAnswer = Integer.toString(gcd(randNumber1, randNumber2));
+        question = randNumber1 + " " + randNumber2;
     }
 
-    private static String gcd(int numb1, int numb2) {
-        int gcd = (numb1 % numb2 == 0) ? Math.abs(numb2) : Integer.parseInt(gcd(numb2, numb1 % numb2));
-        return Integer.toString(gcd);
+    private static int gcd(int numb1, int numb2) {
+        return (numb1 % numb2 == 0) ? Math.abs(numb2) : gcd(numb2, numb1 % numb2);
     }
 }

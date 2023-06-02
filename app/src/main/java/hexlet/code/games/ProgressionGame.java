@@ -27,19 +27,13 @@ public class ProgressionGame {
         int randOrigin = Utils.getRandomInt(PROGRESSION_ORIGIN_ORIGIN, PROGRESSION_ORIGIN_BOUND);
         int randDifference = Utils.getRandomInt(PROGRESSION_DIFFERENCE_ORIGIN, PROGRESSION_DIFFERENCE_BOUND);
         int randHiddenIndex = Utils.getRandomInt(0, PROGRESSION_LENGTH);
-        String[] progression = generateProgression(randOrigin, randDifference, randHiddenIndex);
+        String[] progression = generateProgression(randOrigin, randDifference);
         correctAnswer = progression[randHiddenIndex];
         progression[randHiddenIndex] = "..";
         question = String.join(" ", progression);
-        question = String.format(
-                """
-                        Question: %s
-                        Your answer:\s""",
-                question
-        );
     }
 
-    private static String[] generateProgression(int origin, int difference, int hiddenIndex) {
+    private static String[] generateProgression(int origin, int difference) {
         String[] output = new String[PROGRESSION_LENGTH];
         for (int i = 0; i < PROGRESSION_LENGTH; i++) {
             output[i] = Integer.toString(origin + i * difference);

@@ -21,12 +21,7 @@ public class PrimeGame {
     public static void newQuestion() {
         int randNumber = Utils.getRandomInt();
         correctAnswer = isPrimeNumber(randNumber) ? "yes" : "no";
-        question = String.format(
-                """
-                        Question: %d
-                        Your answer:\s""",
-                randNumber
-        );
+        question = Integer.toString(randNumber);
     }
 
     private static boolean isPrimeNumber(int number) {

@@ -21,12 +21,7 @@ public class EvenGame {
     private static void newQuestion() {
         int randNumber = Utils.getRandomInt();
         correctAnswer = isEven(randNumber) ? "yes" : "no";
-        question = String.format(
-                """
-                        Question: %d
-                        Your answer:\s""",
-                randNumber
-        );
+        question = Integer.toString(randNumber);
     }
 
     private static boolean isEven(int number) {
