@@ -7,6 +7,7 @@ import hexlet.code.games.ProgressionGame;
 import hexlet.code.games.PrimeGame;
 
 public class App {
+    private static final String CASE_EXIT = "0";
     private static final String CASE_GREET = "1";
     private static final String CASE_EVEN = "2";
     private static final String CASE_CALC = "3";
@@ -33,6 +34,8 @@ public class App {
         String choice = Utils.readNextLine();
         System.out.println();
         switch (choice) {
+            case CASE_EXIT:
+                break;
             case CASE_GREET:
                 Cli.greeting();
                 break;
