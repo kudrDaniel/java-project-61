@@ -28,9 +28,6 @@ public class App {
                         0 - Exit
                         Your choice:\s"""
         );
-        /* Used nextLine() method cause nextInt() method use next()
-         * method inside. That's why it read \n symbol and return
-         * empty string */
         String choice = Utils.readNextLine();
         System.out.println();
         switch (choice) {
